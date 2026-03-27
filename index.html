@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selective Marine Services Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#07111F;--navy2:#0B1A2C;--navy3:#0F2035;--navy4:#132540;--gold:#C49A22;--gold-light:#E2B535;--gold-dim:rgba(196,154,34,0.18);--gold-border:rgba(196,154,34,0.35);--white:#FFFFFF;--white70:rgba(255,255,255,0.7);--white40:rgba(255,255,255,0.4);--text-muted:#8BA0B4;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--navy2);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* =====================
+   NAV
+   ===================== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:76px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(7,17,31,.97);border-bottom-color:var(--gold-border);backdrop-filter:blur(12px);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(196,154,34,.4));transition:filter .3s,transform .3s;}
+.nav-logo:hover .nav-logo-img{filter:drop-shadow(0 0 16px rgba(196,154,34,.7));transform:scale(1.05);}
+.nav-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:2px;color:var(--white);text-transform:uppercase;line-height:1.1;}
+.nav-wordmark span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--white70);text-decoration:none;position:relative;padding-bottom:2px;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;text-decoration:none;transition:background .2s,transform .15s;}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px);}
+
+/* Hamburger */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:40px;height:40px;cursor:pointer;gap:5px;background:none;border:none;padding:0;}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:transform .3s,opacity .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.nav-mobile-drawer{display:none;position:fixed;top:76px;left:0;right:0;background:rgba(7,17,31,.98);backdrop-filter:blur(16px);border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);z-index:99;padding:0;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.23,1,.32,1);}
+.nav-mobile-drawer.open{max-height:600px;}
+.nav-mobile-drawer ul{list-style:none;padding:24px 24px 8px;}
+.nav-mobile-drawer ul li{border-bottom:1px solid rgba(255,255,255,.05);}
+.nav-mobile-drawer ul li a{display:block;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--white70);text-decoration:none;padding:16px 0;transition:color .2s;}
+.nav-mobile-drawer ul li a:hover{color:var(--gold);}
+.nav-mobile-drawer .nav-cta-mobile{display:block;margin:20px 24px 24px;background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:14px 24px;text-decoration:none;text-align:center;}
+
+/* =====================
+   HERO
+   ===================== */
+#hero{position:relative;width:100%;height:100vh;min-height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-slides{position:absolute;inset:0;}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.5s ease;}
+.slide.active{opacity:1;}
+.slide-1{background-image:linear-gradient(160deg,#0B2040 0%,#061018 40%,#0D2535 100%);}
+.slide-2{background-image:linear-gradient(160deg,#0D1F35 0%,#081520 50%,#102230 100%);}
+.slide-3{background-image:linear-gradient(160deg,#091828 0%,#0B2030 50%,#061015 100%);}
+.slide-4{background-image:linear-gradient(160deg,#0E2038 0%,#07111F 40%,#0C1A28 100%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(196,154,34,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(196,154,34,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,31,.95) 0%,rgba(7,17,31,.3) 50%,rgba(7,17,31,.6) 100%);}
+.hero-rig{position:absolute;right:6%;bottom:0;width:36%;height:88%;pointer-events:none;opacity:.1;}
+.hero-content{position:relative;z-index:2;width:100%;max-width:1280px;padding:0 80px;display:flex;flex-direction:column;align-items:flex-start;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s;}
+.hero-headline{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.92;letter-spacing:-1px;opacity:0;transform:translateY(20px);transition:opacity .6s .1s,transform .6s .1s;}
+.hero-headline .line1{display:block;font-size:clamp(42px,8vw,96px);color:var(--white);}
+.hero-headline .line2{display:block;font-size:clamp(42px,8vw,96px);color:var(--gold);}
+.hero-desc{font-size:17px;font-weight:300;line-height:1.7;color:var(--white70);max-width:500px;margin-top:24px;opacity:0;transform:translateY(16px);transition:opacity .6s .2s,transform .6s .2s;}
+.hero-buttons{display:flex;gap:16px;margin-top:36px;opacity:0;transform:translateY(16px);transition:opacity .6s .3s,transform .6s .3s;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;text-decoration:none;display:inline-block;transition:background .2s,transform .15s;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-secondary{border:1px solid rgba(255,255,255,.4);color:var(--white);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;text-decoration:none;display:inline-block;transition:border-color .2s,transform .15s;}
+.btn-secondary:hover{border-color:var(--white);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:40px;margin-top:56px;opacity:0;transform:translateY(16px);transition:opacity .6s .4s,transform .6s .4s;flex-wrap:wrap;}
+.stat-item{display:flex;flex-direction:column;gap:4px;}
+.stat-item+.stat-item{padding-left:40px;border-left:1px solid var(--gold-border);}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;color:var(--gold);}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white40);}
+.slide-indicators{position:absolute;bottom:80px;left:80px;z-index:3;display:flex;gap:10px;}
+.indicator{width:52px;height:2px;background:rgba(255,255,255,.2);position:relative;overflow:hidden;cursor:pointer;}
+.indicator-fill{position:absolute;left:0;top:0;height:100%;background:var(--gold);width:0%;}
+.indicator.active .indicator-fill{animation:fillBar 6s linear forwards;}
+@keyframes fillBar{from{width:0%}to{width:100%}}
+.hero-ticker{position:absolute;bottom:0;left:0;right:0;z-index:3;height:46px;background:rgba(7,17,31,.9);backdrop-filter:blur(10px);border-top:1px solid var(--gold-border);display:flex;align-items:center;overflow:hidden;}
+.ticker-label{background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;flex-shrink:0;}
+.ticker-track{flex:1;overflow:hidden;}
+.ticker-inner{display:flex;animation:ticker 44s linear infinite;white-space:nowrap;}
+.ticker-inner span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--white70);padding:0 32px;}
+.ticker-inner .dot{color:var(--gold);padding:0;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-content.visible .hero-eyebrow,.hero-content.visible .hero-headline,.hero-content.visible .hero-desc,.hero-content.visible .hero-buttons,.hero-content.visible .hero-stats{opacity:1;transform:translateY(0);}
+
+/* =====================
+   SECTION BASE
+   ===================== */
+section{padding:110px 0;}
+.container{max-width:1280px;margin:0 auto;padding:0 80px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(32px,4vw,52px);line-height:.95;letter-spacing:-.5px;color:var(--white);margin-bottom:20px;}
+.section-subtitle{font-size:16px;font-weight:300;line-height:1.75;color:var(--text-muted);max-width:560px;}
+
+/* =====================
+   SERVICES
+   ===================== */
+#services{background:var(--navy);padding:110px 0;}
+.services-header{text-align:center;margin-bottom:64px;}
+.services-header .section-subtitle{margin:0 auto;}
+.services-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:390px 390px;gap:3px;max-width:1600px;margin:0 auto;}
+.service-card:nth-child(1){grid-column:1;grid-row:1/span 2;}
+.service-card:nth-child(2){grid-column:2;grid-row:1;}
+.service-card:nth-child(3){grid-column:3;grid-row:1;}
+.service-card:nth-child(4){grid-column:2;grid-row:2;}
+.service-card:nth-child(5){grid-column:3;grid-row:2;}
+.service-card{position:relative;overflow:hidden;cursor:pointer;display:block;text-decoration:none;}
+.card-photo{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.25,.46,.45,.94);}
+.service-card:hover .card-photo{transform:scale(1.06);}
+.card-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,9,15,.96) 0%,rgba(4,9,15,.7) 35%,rgba(4,9,15,.15) 65%,rgba(4,9,15,.0) 100%);transition:background .4s;}
+.service-card:hover .card-scrim{background:linear-gradient(to top,rgba(4,9,15,.97) 0%,rgba(4,9,15,.82) 45%,rgba(4,9,15,.3) 72%,rgba(4,9,15,.05) 100%);}
+.service-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,154,34,.07) 0%,transparent 55%);opacity:0;transition:opacity .4s;}
+.service-card:hover::after{opacity:1;}
+.card-num{position:absolute;top:24px;left:28px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:rgba(4,9,15,.55);padding:5px 10px;border:1px solid var(--gold-border);z-index:2;}
+.card-bar{position:absolute;bottom:0;left:0;width:3px;height:0;background:var(--gold);z-index:3;transition:height .4s cubic-bezier(.23,1,.32,1);}
+.service-card:hover .card-bar{height:100%;}
+.card-content{position:absolute;bottom:0;left:0;right:0;padding:30px 32px 34px 34px;z-index:3;}
+.card-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block;opacity:0;transform:translateY(8px);transition:opacity .35s .05s,transform .35s .05s;}
+.service-card:hover .card-tag{opacity:1;transform:translateY(0);}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--white);line-height:.95;letter-spacing:.5px;margin-bottom:0;transition:margin-bottom .35s;}
+.service-card:nth-child(1) .card-title{font-size:clamp(26px,3vw,42px);}
+.service-card:not(:nth-child(1)) .card-title{font-size:clamp(18px,2.2vw,28px);}
+.service-card:hover .card-title{margin-bottom:12px;}
+.card-desc{font-size:13px;line-height:1.7;font-weight:300;color:rgba(255,255,255,.72);max-height:0;overflow:hidden;opacity:0;transition:max-height .45s,opacity .35s .1s;}
+.service-card:hover .card-desc{max-height:120px;opacity:1;}
+.card-arrow{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .3s .15s,transform .3s .15s;}
+.service-card:hover .card-arrow{opacity:1;transform:translateX(0);}
+
+/* =====================
+   ABOUT
+   ===================== */
+#about{background:var(--navy);overflow:hidden;padding:0;}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;min-height:640px;}
+.about-visual{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.about-visual-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0B2040 0%,#071520 60%,#0D2535 100%);}
+.about-visual-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,154,34,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(196,154,34,.07) 1px,transparent 1px);background-size:60px 60px;}
+.about-rig-svg{position:relative;z-index:1;width:70%;opacity:.6;}
+.about-gold-bar{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gold);}
+.about-text{background:var(--navy2);padding:80px 72px;display:flex;flex-direction:column;justify-content:center;}
+.about-body{font-size:15px;line-height:1.85;font-weight:300;color:var(--text-muted);margin-bottom:16px;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gold-border);border:1px solid var(--gold-border);margin-top:44px;}
+.about-stat{background:var(--navy3);padding:22px 24px;display:flex;flex-direction:column;gap:4px;}
+.about-stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:var(--gold);}
+.about-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white40);}
+
+/* =====================
+   PERFORMANCE
+   ===================== */
+#performance{background:var(--gold);padding:64px 0;}
+.perf-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.perf-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);color:var(--navy);letter-spacing:-.5px;line-height:.9;}
+.perf-metrics{display:flex;gap:48px;align-items:center;flex-wrap:wrap;}
+.perf-metric{text-align:center;}
+.perf-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,4vw,52px);color:var(--navy);line-height:1;}
+.perf-unit{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(7,17,31,.6);margin-top:4px;}
+.perf-divider{width:1px;height:60px;background:rgba(7,17,31,.2);}
+.perf-cta{border:2px solid var(--navy);color:var(--navy);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;text-decoration:none;transition:background .2s,color .2s;white-space:nowrap;}
+.perf-cta:hover{background:var(--navy);color:var(--gold);}
+
+/* =====================
+   GLOBAL
+   ===================== */
+#global{background:var(--navy3);}
+.global-header{text-align:center;margin-bottom:56px;}
+.global-header .section-subtitle{margin:0 auto;}
+.world-map-svg{width:100%;}
+.office-chip-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:40px;}
+.office-chip{border:1px solid var(--gold-border);padding:8px 18px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--white70);transition:border-color .2s,color .2s,background .2s;cursor:pointer;}
+.office-chip:hover{border-color:var(--gold);color:var(--white);background:var(--gold-dim);}
+
+/* =====================
+   FLEET
+   ===================== */
+#fleet{background:var(--navy2);}
+.fleet-header{margin-bottom:56px;}
+.fleet-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gold-border);}
+.fleet-card{background:var(--navy2);padding:48px 44px;}
+.fleet-card-type{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
+.fleet-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:var(--white);margin-bottom:12px;}
+.fleet-card-desc{font-size:14px;line-height:1.7;color:var(--text-muted);}
+.fleet-specs{display:flex;gap:24px;margin-top:28px;flex-wrap:wrap;}
+.fleet-spec{display:flex;flex-direction:column;gap:3px;}
+.fleet-spec-val{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:20px;color:var(--gold);}
+.fleet-spec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--white40);}
+
+/* =====================
+   SAFETY
+   ===================== */
+#safety{background:var(--navy);overflow:hidden;}
+.safety-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center;}
+.safety-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
+.safety-stat-card{border:1px solid var(--gold-border);padding:28px 24px;background:var(--navy2);position:relative;overflow:hidden;}
+.safety-stat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);}
+.safety-big-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:44px;color:var(--gold);line-height:1;}
+.safety-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white40);margin-top:6px;}
+.safety-visual{display:flex;align-items:center;justify-content:center;}
+.safety-circle{width:300px;height:300px;border-radius:50%;border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;position:relative;}
+.safety-circle::before{content:'';position:absolute;inset:16px;border-radius:50%;border:1px solid rgba(196,154,34,.15);}
+.safety-circle::after{content:'';position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(196,154,34,.1);}
+.safety-zero{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:80px;color:var(--gold);line-height:1;text-align:center;}
+.safety-zero-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--white40);text-align:center;}
+.cert-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;}
+.cert-badge{border:1px solid var(--gold-border);padding:8px 16px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+
+/* =====================
+   PEOPLE
+   ===================== */
+#people{background:var(--navy2);padding:0;overflow:hidden;}
+.people-inner{display:grid;grid-template-columns:1fr 1fr;min-height:480px;}
+.people-text{background:var(--navy2);padding:80px 72px;display:flex;flex-direction:column;justify-content:center;}
+.people-visual{background:var(--navy4);position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.people-visual-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0F2845 0%,#081520 100%);}
+.people-visual-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,154,34,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(196,154,34,.06) 1px,transparent 1px);background-size:50px 50px;}
+.people-stat-row{position:relative;z-index:2;width:100%;padding:40px 48px;display:flex;flex-direction:column;gap:18px;}
+.bar-label-row{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white40);margin-bottom:6px;}
+.bar-track{height:3px;background:rgba(255,255,255,.08);width:100%;overflow:hidden;}
+.bar-fill{height:100%;background:var(--gold);width:0%;transition:width 1.2s cubic-bezier(.23,1,.32,1);}
+
+/* =====================
+   CTA
+   ===================== */
+#cta-banner{background:var(--gold);padding:90px 0;text-align:center;}
+.cta-decor{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px;}
+.cta-decor-line{width:80px;height:1px;background:rgba(7,17,31,.3);}
+.cta-decor-diamond{width:6px;height:6px;background:var(--navy);transform:rotate(45deg);}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(30px,5vw,58px);color:var(--navy);line-height:.95;letter-spacing:-.5px;margin-bottom:20px;}
+.cta-sub{font-size:16px;font-weight:300;line-height:1.7;color:rgba(7,17,31,.65);max-width:480px;margin:0 auto 40px;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-dark{background:var(--navy);color:var(--gold);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;text-decoration:none;transition:background .2s;}
+.cta-btn-dark:hover{background:#122035;}
+.cta-btn-outline{border:2px solid var(--navy);color:var(--navy);font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;text-decoration:none;transition:background .2s,color .2s;}
+.cta-btn-outline:hover{background:var(--navy);color:var(--gold);}
+
+/* =====================
+   FOOTER
+   ===================== */
+footer{background:#04090F;border-top:1px solid var(--gold-border);padding:72px 0 32px;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:56px;}
+.footer-logo-img{width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(196,154,34,.3));margin-bottom:14px;display:block;}
+.footer-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:14px;display:block;}
+.footer-wordmark span{color:var(--gold);}
+.footer-tagline{font-size:13px;line-height:1.8;font-weight:300;color:var(--white40);max-width:260px;margin-bottom:24px;}
+.footer-socials{display:flex;gap:12px;}
+.social-icon{width:34px;height:34px;border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;color:var(--white40);text-decoration:none;font-size:12px;transition:border-color .2s,color .2s;}
+.social-icon:hover{border-color:var(--gold);color:var(--gold);}
+.footer-col-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:block;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer-links a{font-size:13px;font-weight:300;color:var(--white40);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-contact{display:flex;flex-direction:column;gap:14px;}
+.contact-item{display:flex;gap:12px;align-items:flex-start;}
+.contact-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0;}
+.contact-text{font-size:13px;font-weight:300;color:var(--white40);line-height:1.6;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white40);}
+.footer-legal{display:flex;gap:28px;flex-wrap:wrap;}
+.footer-legal a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white40);text-decoration:none;transition:color .2s;}
+.footer-legal a:hover{color:var(--gold);}
+
+/* =====================
+   REVEAL
+   ===================== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+
+/* ================================================================
+   RESPONSIVE — TABLET  (≤ 1024px)
+   ================================================================ */
+@media (max-width:1024px){
+  nav{padding:0 32px;}
+  .nav-links{gap:20px;}
+  .hero-content{padding:0 48px;}
+  .container{padding:0 48px;}
+  .slide-indicators{left:48px;}
+
+  .services-grid{grid-template-columns:1fr 1fr;grid-template-rows:320px 320px 320px;}
+  .service-card:nth-child(1){grid-column:1/span 2;grid-row:1;}
+  .service-card:nth-child(2){grid-column:1;grid-row:2;}
+  .service-card:nth-child(3){grid-column:2;grid-row:2;}
+  .service-card:nth-child(4){grid-column:1;grid-row:3;}
+  .service-card:nth-child(5){grid-column:2;grid-row:3;}
+
+  .about-text{padding:60px 48px;}
+  .safety-inner{gap:48px;}
+  .people-text{padding:60px 48px;}
+  .people-stat-row{padding:32px 36px;}
+
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px 32px;}
+}
+
+/* ================================================================
+   RESPONSIVE — LARGE MOBILE  (≤ 768px)
+   ================================================================ */
+@media (max-width:768px){
+  /* Nav */
+  nav{padding:0 20px;height:68px;}
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .nav-mobile-drawer{display:block;}
+  .nav-logo-img{width:44px;height:44px;}
+  .nav-wordmark{font-size:14px;}
+
+  /* Hero */
+  #hero{min-height:100svh;}
+  .hero-content{padding:0 24px;}
+  .hero-rig{display:none;}
+  .hero-headline .line1,.hero-headline .line2{font-size:clamp(38px,10vw,60px);}
+  .hero-desc{font-size:15px;max-width:100%;}
+  .hero-buttons{gap:12px;margin-top:28px;}
+  .btn-primary,.btn-secondary{padding:14px 24px;font-size:10px;}
+  .hero-stats{gap:0;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;row-gap:20px;}
+  .stat-item{padding-left:0!important;border-left:none!important;position:relative;padding-bottom:20px;}
+  .stat-item:nth-child(odd)::after{content:'';position:absolute;right:0;top:4px;bottom:4px;width:1px;background:var(--gold-border);}
+  .stat-item:nth-child(1),.stat-item:nth-child(2){padding-left:0;}
+  .stat-item:nth-child(2),.stat-item:nth-child(4){padding-left:20px!important;}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){padding-bottom:0;}
+  .stat-num{font-size:26px;}
+  .slide-indicators{bottom:60px;left:24px;}
+  .indicator{width:36px;}
+  .hero-ticker{height:40px;}
+  .ticker-label{font-size:9px;padding:0 10px;}
+  .ticker-inner span{font-size:10px;padding:0 20px;}
+
+  /* Sections */
+  section{padding:72px 0;}
+  .container{padding:0 20px;}
+
+  /* Services */
+  #services{padding:72px 0;}
+  .services-header{margin-bottom:40px;}
+  .services-grid{display:flex;flex-direction:column;gap:3px;}
+  .service-card{height:260px;}
+  .service-card:nth-child(1){height:300px;}
+  .card-tag{opacity:1;transform:translateY(0);}
+  .card-desc{max-height:80px;opacity:.8;}
+  .card-arrow{opacity:1;transform:translateX(0);}
+
+  /* About */
+  #about{padding:0;}
+  .about-inner{grid-template-columns:1fr;min-height:auto;}
+  .about-visual{min-height:260px;}
+  .about-rig-svg{width:50%;}
+  .about-text{padding:48px 20px;}
+
+  /* Performance */
+  #performance{padding:48px 0;}
+  .perf-inner{flex-direction:column;align-items:flex-start;gap:32px;}
+  .perf-metrics{gap:28px;}
+  .perf-divider{width:1px;height:44px;}
+
+  /* Global */
+  .world-map-svg{min-height:220px;}
+
+  /* Fleet */
+  .fleet-grid{grid-template-columns:1fr;}
+  .fleet-card{padding:32px 20px;}
+
+  /* Safety */
+  #safety{padding:72px 0;}
+  .safety-inner{grid-template-columns:1fr;gap:40px;}
+  .safety-visual{order:-1;}
+  .safety-circle{width:220px;height:220px;}
+  .safety-zero{font-size:60px;}
+  .safety-stats{grid-template-columns:1fr 1fr;gap:12px;margin-top:32px;}
+  .safety-stat-card{padding:20px 16px;}
+  .safety-big-num{font-size:34px;}
+
+  /* People */
+  #people{padding:0;}
+  .people-inner{grid-template-columns:1fr;min-height:auto;}
+  .people-visual{min-height:300px;}
+  .people-text{padding:48px 20px;}
+  .people-stat-row{padding:28px 20px;}
+
+  /* CTA */
+  #cta-banner{padding:60px 0;}
+  .cta-buttons{flex-direction:column;align-items:center;gap:12px;}
+  .cta-btn-dark,.cta-btn-outline{width:100%;max-width:320px;text-align:center;}
+
+  /* Footer */
+  footer{padding:48px 0 24px;}
+  .footer-grid{grid-template-columns:1fr;gap:40px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px;}
+  .footer-legal{gap:20px;}
+}
+
+/* ================================================================
+   RESPONSIVE — SMALL MOBILE  (≤ 480px)
+   ================================================================ */
+@media (max-width:480px){
+  nav{padding:0 16px;}
+  .nav-wordmark{font-size:12px;letter-spacing:1px;}
+  .nav-logo-img{width:38px;height:38px;}
+
+  .hero-content{padding:0 16px;}
+  .hero-headline .line1,.hero-headline .line2{font-size:clamp(34px,11vw,52px);}
+  .hero-desc{font-size:14px;}
+  .hero-buttons{flex-direction:column;gap:10px;width:100%;}
+  .btn-primary,.btn-secondary{width:100%;text-align:center;padding:14px 20px;}
+  .slide-indicators{left:16px;}
+
+  .container{padding:0 16px;}
+
+  .service-card{height:240px;}
+  .card-content{padding:20px 20px 24px 22px;}
+
+  .about-text{padding:40px 16px;}
+  .people-text{padding:40px 16px;}
+  .people-stat-row{padding:24px 16px;}
+
+  .perf-metrics{gap:16px;}
+  .perf-num{font-size:32px;}
+
+  .safety-circle{width:180px;height:180px;}
+  .safety-zero{font-size:50px;}
+  .safety-stats{grid-template-columns:1fr 1fr;}
+  .safety-big-num{font-size:28px;}
+
+  .cert-badge{font-size:9px;padding:6px 10px;}
+
+  .cta-title br{display:none;}
+
+  footer{padding:40px 0 20px;}
+  .footer-grid{gap:32px;}
+
+  .nav-mobile-drawer{top:68px;}
+}
+
+/* ================================================================
+   RESPONSIVE — EXTRA SMALL  (≤ 360px)
+   ================================================================ */
+@media (max-width:360px){
+  .hero-headline .line1,.hero-headline .line2{font-size:32px;}
+  .stat-item:nth-child(2),.stat-item:nth-child(4){padding-left:12px!important;}
+  .perf-metrics{flex-direction:column;align-items:flex-start;gap:20px;}
+  .perf-divider{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="Selective Marine Services Group" class="nav-logo-img">
+    <span class="nav-wordmark">Selective Marine<span> Services</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="#safety">Safety</a></li>
+    <li><a href="#global">Offices</a></li>
+    <li><a href="#people">Careers</a></li>
+  </ul>
+  <a href="#cta-banner" class="nav-cta">Request a Quote</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<nav class="nav-mobile-drawer" id="mobileDrawer">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="#safety">Safety</a></li>
+    <li><a href="#global">Offices</a></li>
+    <li><a href="#people">Careers</a></li>
+  </ul>
+  <a href="#cta-banner" class="nav-cta-mobile">Request a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="slide slide-1 active"></div>
+    <div class="slide slide-2"></div>
+    <div class="slide slide-3"></div>
+    <div class="slide slide-4"></div>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-rig" viewBox="0 0 300 500" fill="none">
+    <rect x="120" y="300" width="60" height="180" fill="white" opacity=".3"/>
+    <rect x="60" y="250" width="180" height="20" fill="white" opacity=".4"/>
+    <rect x="80" y="200" width="140" height="20" fill="white" opacity=".3"/>
+    <line x1="150" y1="0" x2="150" y2="250" stroke="white" stroke-width="4" opacity=".4"/>
+    <line x1="70" y1="80" x2="150" y2="250" stroke="white" stroke-width="2" opacity=".3"/>
+    <line x1="230" y1="80" x2="150" y2="250" stroke="white" stroke-width="2" opacity=".3"/>
+    <line x1="40" y1="150" x2="150" y2="250" stroke="white" stroke-width="1.5" opacity=".25"/>
+    <line x1="260" y1="150" x2="150" y2="250" stroke="white" stroke-width="1.5" opacity=".25"/>
+    <rect x="100" y="250" width="100" height="50" fill="white" opacity=".2"/>
+    <rect x="85" y="300" width="130" height="60" fill="white" opacity=".3"/>
+    <rect x="110" y="360" width="80" height="120" fill="white" opacity=".35"/>
+    <rect x="0" y="460" width="300" height="40" fill="white" opacity=".15"/>
+  </svg>
+  <div class="hero-content" id="heroContent">
+    <span class="hero-eyebrow" id="heroEyebrow">Rig Inspection</span>
+    <h1 class="hero-headline">
+      <span class="line1" id="heroLine1">NOTHING GETS</span>
+      <span class="line2" id="heroLine2">PAST OUR EYE.</span>
+    </h1>
+    <p class="hero-desc" id="heroDesc">Rigorous structural, mechanical, and compliance inspections — so you know exactly where your asset stands before committing a single dollar.</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#about" class="btn-secondary">Company Profile</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">30+</span><span class="stat-label">Years Operating</span></div>
+      <div class="stat-item"><span class="stat-num">8+</span><span class="stat-label">Global Offices</span></div>
+      <div class="stat-item"><span class="stat-num">200+</span><span class="stat-label">Expert Crew</span></div>
+      <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Active Rigs</span></div>
+    </div>
+  </div>
+  <div class="slide-indicators" id="indicators">
+    <div class="indicator active"><div class="indicator-fill"></div></div>
+    <div class="indicator"><div class="indicator-fill"></div></div>
+    <div class="indicator"><div class="indicator-fill"></div></div>
+    <div class="indicator"><div class="indicator-fill"></div></div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-label">Latest News</div>
+    <div class="ticker-track"><div class="ticker-inner">
+      <span>SMS Group awarded major rig inspection contract in UAE</span><span class="dot"> ◆ </span>
+      <span>New office opened in The Netherlands</span><span class="dot"> ◆ </span>
+      <span>200+ certified crew deployed across 3 continents</span><span class="dot"> ◆ </span>
+      <span>Zero lost-time incidents recorded this quarter</span><span class="dot"> ◆ </span>
+      <span>Selective Marine celebrates 30 years of offshore excellence</span><span class="dot"> ◆ </span>
+      <span>SMS Group awarded major rig inspection contract in UAE</span><span class="dot"> ◆ </span>
+      <span>New office opened in The Netherlands</span><span class="dot"> ◆ </span>
+      <span>200+ certified crew deployed across 3 continents</span><span class="dot"> ◆ </span>
+      <span>Zero lost-time incidents recorded this quarter</span><span class="dot"> ◆ </span>
+      <span>Selective Marine celebrates 30 years of offshore excellence</span><span class="dot"> ◆ </span>
+    </div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <span class="section-eyebrow reveal">What We Do</span>
+      <h2 class="section-title reveal reveal-delay-1">Where Precision<br>Meets the Sea.</h2>
+      <p class="section-subtitle reveal reveal-delay-2">Five disciplines. One standard of excellence. From the first inspection to the final weld — we keep your offshore assets running at peak performance.</p>
+    </div>
+  </div>
+  <div class="services-grid reveal">
+    <a href="#" class="service-card">
+      <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=900&q=80&fit=crop');"></div>
+      <div class="card-scrim"></div><div class="card-bar"></div>
+      <span class="card-num">01</span>
+      <div class="card-content">
+        <span class="card-tag">Rig Inspection</span>
+        <div class="card-title">Nothing Gets<br>Past Our Eye.</div>
+        <div class="card-desc">Rigorous structural, mechanical, and compliance inspections by certified engineers — so you know exactly where your asset stands before a single dollar is committed.</div>
+        <span class="card-arrow">Explore Service →</span>
+      </div>
+    </a>
+    <a href="#" class="service-card">
+      <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&fit=crop');"></div>
+      <div class="card-scrim"></div><div class="card-bar"></div>
+      <span class="card-num">02</span>
+      <div class="card-content">
+        <span class="card-tag">Fabrication</span>
+        <div class="card-title">Built Strong.<br>Built to Last.</div>
+        <div class="card-desc">Marine-grade fabrication from structural steelwork to custom offshore components — engineered to perform in the harshest environments on earth.</div>
+        <span class="card-arrow">Explore Service →</span>
+      </div>
+    </a>
+    <a href="#" class="service-card">
+      <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop');background-position:center top;"></div>
+      <div class="card-scrim"></div><div class="card-bar"></div>
+      <span class="card-num">03</span>
+      <div class="card-content">
+        <span class="card-tag">Project Management</span>
+        <div class="card-title">On Time.<br>On Spec. Always.</div>
+        <div class="card-desc">End-to-end oversight from mobilisation to decommissioning — with PMs who understand the offshore world's unforgiving realities.</div>
+        <span class="card-arrow">Explore Service →</span>
+      </div>
+    </a>
+    <a href="#" class="service-card">
+      <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80&fit=crop');"></div>
+      <div class="card-scrim"></div><div class="card-bar"></div>
+      <span class="card-num">04</span>
+      <div class="card-content">
+        <span class="card-tag">Jacking System Repairs</span>
+        <div class="card-title">When It Has to<br>Move, It Will.</div>
+        <div class="card-desc">Specialist repair and overhaul of jack-up rig leg and jacking systems — minimising downtime and restoring full operational capability fast.</div>
+        <span class="card-arrow">Explore Service →</span>
+      </div>
+    </a>
+    <a href="#" class="service-card">
+      <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=800&q=80&fit=crop');"></div>
+      <div class="card-scrim"></div><div class="card-bar"></div>
+      <span class="card-num">05</span>
+      <div class="card-content">
+        <span class="card-tag">Electrical &amp; Mechanical</span>
+        <div class="card-title">Keeping Every<br>System Live.</div>
+        <div class="card-desc">Comprehensive E&amp;M maintenance from switchgear overhauls to hydraulic systems — keeping your rig powered, pressured, and production-ready.</div>
+        <span class="card-arrow">Explore Service →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-visual-bg"></div><div class="about-visual-grid"></div><div class="about-gold-bar"></div>
+      <svg class="about-rig-svg" viewBox="0 0 260 360" fill="none">
+        <line x1="130" y1="10" x2="130" y2="180" stroke="#C49A22" stroke-width="3" stroke-linecap="round"/>
+        <line x1="60" y1="70" x2="130" y2="180" stroke="#C49A22" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        <line x1="200" y1="70" x2="130" y2="180" stroke="#C49A22" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        <line x1="30" y1="130" x2="130" y2="180" stroke="#C49A22" stroke-width="1" stroke-linecap="round" opacity=".3"/>
+        <line x1="230" y1="130" x2="130" y2="180" stroke="#C49A22" stroke-width="1" stroke-linecap="round" opacity=".3"/>
+        <rect x="70" y="175" width="120" height="30" rx="2" fill="#C49A22" opacity=".3" stroke="#C49A22" stroke-width="1"/>
+        <rect x="50" y="205" width="160" height="40" rx="2" fill="#C49A22" opacity=".2" stroke="#C49A22" stroke-width="1"/>
+        <rect x="80" y="245" width="100" height="80" rx="2" fill="#C49A22" opacity=".25" stroke="#C49A22" stroke-width="1"/>
+        <rect x="0" y="325" width="260" height="35" rx="2" fill="#C49A22" opacity=".15" stroke="#C49A22" stroke-width="1"/>
+        <circle cx="130" cy="10" r="4" fill="#C49A22"/>
+        <circle cx="60" cy="70" r="3" fill="#C49A22" opacity=".6"/>
+        <circle cx="200" cy="70" r="3" fill="#C49A22" opacity=".6"/>
+      </svg>
+    </div>
+    <div class="about-text">
+      <span class="section-eyebrow reveal">Who We Are</span>
+      <h2 class="section-title reveal reveal-delay-1">30 Years of<br>Offshore Excellence</h2>
+      <p class="about-body reveal reveal-delay-2">Founded in 1995 in the Middle East, SMS Group has grown from a regional name into an internationally recognised marine and offshore engineering brand — with offices spanning UAE, India, Singapore, Nigeria, China, Malaysia, France, and The Netherlands.</p>
+      <p class="about-body reveal reveal-delay-2">We combine deep operational expertise with an unwavering commitment to safety, providing rig management, ship repair, manpower supply, and project engineering to clients across the oil &amp; gas and shipping sectors.</p>
+      <div class="about-stats reveal reveal-delay-3">
+        <div class="about-stat"><span class="about-stat-num">8+</span><span class="about-stat-label">Global Offices</span></div>
+        <div class="about-stat"><span class="about-stat-num">3</span><span class="about-stat-label">Operating Rigs</span></div>
+        <div class="about-stat"><span class="about-stat-num">200+</span><span class="about-stat-label">Expert Staff</span></div>
+        <div class="about-stat"><span class="about-stat-num">0</span><span class="about-stat-label">Compromise on Safety</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section id="performance">
+  <div class="container">
+    <div class="perf-inner">
+      <div class="perf-title">PROVEN<br>PERFORMANCE.</div>
+      <div class="perf-metrics">
+        <div class="perf-metric"><div class="perf-num">99.8%</div><div class="perf-unit">Uptime Rate</div></div>
+        <div class="perf-divider"></div>
+        <div class="perf-metric"><div class="perf-num">30+</div><div class="perf-unit">Years Experience</div></div>
+        <div class="perf-divider"></div>
+        <div class="perf-metric"><div class="perf-num">0</div><div class="perf-unit">LTI Target</div></div>
+      </div>
+      <a href="#about" class="perf-cta">Our Track Record →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section id="global">
+  <div class="container">
+    <div class="global-header">
+      <span class="section-eyebrow reveal">Global Reach</span>
+      <h2 class="section-title reveal reveal-delay-1">Operating Across<br>3 Continents</h2>
+      <p class="section-subtitle reveal reveal-delay-2">With offices in the Middle East, Asia, Africa, and Europe, we bring local expertise to every international operation — wherever you need us.</p>
+    </div>
+    <div class="reveal">
+      <svg class="world-map-svg" viewBox="0 0 900 420" fill="none">
+        <line x1="0" y1="210" x2="900" y2="210" stroke="rgba(196,154,34,.12)" stroke-width="1"/>
+        <line x1="450" y1="0" x2="450" y2="420" stroke="rgba(196,154,34,.12)" stroke-width="1"/>
+        <ellipse cx="450" cy="210" rx="420" ry="195" stroke="rgba(196,154,34,.08)" stroke-width="1"/>
+        <path d="M60 80 L180 60 L240 100 L260 160 L240 200 L200 220 L160 210 L120 240 L80 220 L50 180Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M170 240 L230 230 L260 280 L270 340 L240 380 L200 390 L170 360 L155 310 L160 270Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M390 60 L440 50 L480 70 L490 100 L470 120 L450 110 L420 130 L400 120 L380 90Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M400 140 L460 130 L490 150 L500 200 L510 260 L500 330 L470 370 L440 360 L410 320 L390 260 L385 200Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M510 130 L570 120 L600 140 L610 170 L580 190 L540 185 L510 170Z" fill="rgba(196,154,34,.12)" stroke="rgba(196,154,34,.3)" stroke-width="1"/>
+        <path d="M570 50 L700 40 L780 80 L800 120 L770 150 L720 160 L680 150 L640 160 L600 150 L580 130 L570 100Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M680 170 L740 165 L760 185 L750 210 L720 220 L690 210 L675 190Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <path d="M700 270 L790 260 L830 290 L840 340 L800 370 L740 375 L700 350 L685 310Z" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.2)" stroke-width="1"/>
+        <circle cx="548" cy="158" r="14" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="14;20;14" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="548" cy="158" r="6" fill="#C49A22" opacity=".9"/>
+        <text x="548" y="136" text-anchor="middle" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">DUBAI</text>
+        <circle cx="620" cy="195" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="3.5s" repeatCount="indefinite"/></circle>
+        <circle cx="620" cy="195" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="640" y="199" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">INDIA</text>
+        <circle cx="705" cy="210" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="4s" repeatCount="indefinite"/></circle>
+        <circle cx="705" cy="210" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="718" y="214" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">SINGAPORE</text>
+        <circle cx="435" cy="240" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="3.2s" repeatCount="indefinite"/></circle>
+        <circle cx="435" cy="240" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="448" y="244" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">NIGERIA</text>
+        <circle cx="730" cy="130" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="2.8s" repeatCount="indefinite"/></circle>
+        <circle cx="730" cy="130" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="743" y="134" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">CHINA</text>
+        <circle cx="680" cy="225" r="5" fill="#C49A22" opacity=".9"/>
+        <circle cx="418" cy="90" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="4.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="4.2s" repeatCount="indefinite"/></circle>
+        <circle cx="418" cy="90" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="428" y="94" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">FRANCE</text>
+        <circle cx="432" cy="72" r="12" fill="rgba(196,154,34,.08)" stroke="rgba(196,154,34,.3)" stroke-width="1"><animate attributeName="r" values="12;18;12" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="3.6s" repeatCount="indefinite"/></circle>
+        <circle cx="432" cy="72" r="5" fill="#C49A22" opacity=".9"/>
+        <text x="442" y="66" fill="#C49A22" font-family="DM Mono,monospace" font-size="10" letter-spacing="1">NETHERLANDS</text>
+        <line x1="548" y1="158" x2="620" y2="195" stroke="rgba(196,154,34,.15)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="620" y1="195" x2="705" y2="210" stroke="rgba(196,154,34,.15)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="705" y1="210" x2="730" y2="130" stroke="rgba(196,154,34,.15)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="548" y1="158" x2="435" y2="240" stroke="rgba(196,154,34,.15)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="548" y1="158" x2="418" y2="90" stroke="rgba(196,154,34,.15)" stroke-width="1" stroke-dasharray="4 4"/>
+      </svg>
+    </div>
+    <div class="office-chip-grid reveal">
+      <div class="office-chip">🇦🇪 Dubai, UAE</div>
+      <div class="office-chip">🇮🇳 Chennai, India</div>
+      <div class="office-chip">🇸🇬 Singapore</div>
+      <div class="office-chip">🇳🇬 Nigeria</div>
+      <div class="office-chip">🇨🇳 China</div>
+      <div class="office-chip">🇲🇾 Malaysia</div>
+      <div class="office-chip">🇫🇷 France</div>
+      <div class="office-chip">🇳🇱 Netherlands</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet">
+  <div class="container">
+    <div class="fleet-header">
+      <span class="section-eyebrow reveal">Our Fleet</span>
+      <h2 class="section-title reveal reveal-delay-1">Rigs Built to<br>Perform.</h2>
+      <p class="section-subtitle reveal reveal-delay-2">Ultra-capable rigs and vessels ready to respond wherever your operation demands — from shallow waters to extreme offshore environments.</p>
+    </div>
+    <div class="fleet-grid reveal">
+      <div class="fleet-card">
+        <span class="fleet-card-type">Jack-Up Rig</span>
+        <div class="fleet-card-name">SMS Achiever</div>
+        <div class="fleet-card-desc">A high-specification cantilevered jack-up rig designed for shallow to mid-water operations in the Middle East, Southeast Asia, and West Africa.</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-val">350ft</span><span class="fleet-spec-label">Max Depth</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">30,000 HP</span><span class="fleet-spec-label">Drawworks</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">1,000T</span><span class="fleet-spec-label">Hook Load</span></div>
+        </div>
+      </div>
+      <div class="fleet-card">
+        <span class="fleet-card-type">Accommodation Barge</span>
+        <div class="fleet-card-name">SMS Horizon</div>
+        <div class="fleet-card-desc">A fully-equipped offshore accommodation vessel supporting crew welfare and logistics for large-scale field development projects.</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-val">300</span><span class="fleet-spec-label">POB Capacity</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">DP2</span><span class="fleet-spec-label">Positioning</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">5,000T</span><span class="fleet-spec-label">Displacement</span></div>
+        </div>
+      </div>
+      <div class="fleet-card">
+        <span class="fleet-card-type">Tender Assist Rig</span>
+        <div class="fleet-card-name">SMS Frontier</div>
+        <div class="fleet-card-desc">Tender-assisted drilling rig offering a cost-effective solution for moderate-depth offshore platforms, optimised for tropical environments.</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-val">1,500ft</span><span class="fleet-spec-label">Water Depth</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">750T</span><span class="fleet-spec-label">Deck Load</span></div>
+          <div class="fleet-spec"><span class="fleet-spec-val">500T</span><span class="fleet-spec-label">Crane Capacity</span></div>
+        </div>
+      </div>
+      <div class="fleet-card" style="background:var(--navy3);border:1px dashed var(--gold-border);display:flex;align-items:center;justify-content:center;text-align:center;">
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:48px;color:var(--gold-border);margin-bottom:12px;">+</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Charter Inquiry</div>
+          <div style="font-size:14px;color:var(--white40);margin-bottom:20px;">Need a specific vessel? Let us source the right asset for your project.</div>
+          <a href="#cta-banner" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;">Discuss Requirements →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section id="safety">
+  <div class="container">
+    <div class="safety-inner">
+      <div>
+        <span class="section-eyebrow reveal">Safety &amp; Standards</span>
+        <h2 class="section-title reveal reveal-delay-1">Built on a<br>Zero-Incident<br>Philosophy.</h2>
+        <p class="section-subtitle reveal reveal-delay-2">Every operation is governed by internationally recognised safety standards — a team culture where safety is non-negotiable, from the boardroom to the rig floor.</p>
+        <div class="safety-stats reveal reveal-delay-3">
+          <div class="safety-stat-card"><div class="safety-big-num">0</div><div class="safety-stat-label">LTI Target / Year</div></div>
+          <div class="safety-stat-card"><div class="safety-big-num">100%</div><div class="safety-stat-label">HSE Compliance</div></div>
+          <div class="safety-stat-card"><div class="safety-big-num">30yr</div><div class="safety-stat-label">Safety Track Record</div></div>
+          <div class="safety-stat-card"><div class="safety-big-num">24/7</div><div class="safety-stat-label">HSE Monitoring</div></div>
+        </div>
+        <div class="cert-list reveal">
+          <span class="cert-badge">ISO 9001:2015</span>
+          <span class="cert-badge">OHSAS 18001</span>
+          <span class="cert-badge">ISM Code</span>
+          <span class="cert-badge">STCW Certified</span>
+          <span class="cert-badge">OPITO Approved</span>
+        </div>
+      </div>
+      <div class="safety-visual reveal reveal-delay-2">
+        <div class="safety-circle">
+          <div><div class="safety-zero">ZERO</div><div class="safety-zero-label">Incident<br>Commitment</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="people-inner">
+    <div class="people-visual">
+      <div class="people-visual-bg"></div><div class="people-visual-grid"></div>
+      <div class="people-stat-row">
+        <div>
+          <div class="bar-label-row"><span>Engineering &amp; Technical</span><span>42%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="42"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span>Operations &amp; Crew</span><span>35%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="35"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span>HSE &amp; Compliance</span><span>13%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="13"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span>Project Management</span><span>10%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="10"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="people-text">
+      <span class="section-eyebrow reveal">Our People</span>
+      <h2 class="section-title reveal reveal-delay-1">Experience a Career<br>Without Limits.</h2>
+      <p class="section-subtitle reveal reveal-delay-2" style="margin-bottom:36px;">A professional environment that encourages collaboration, growth, and excellence. Join a committed team operating at the edge of offshore engineering across 8 countries.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:36px;" class="reveal reveal-delay-3">
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);"><span style="color:var(--gold);font-size:18px;">—</span>Competitive offshore compensation packages</div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);"><span style="color:var(--gold);font-size:18px;">—</span>International deployment opportunities</div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);"><span style="color:var(--gold);font-size:18px;">—</span>Continuous training &amp; OPITO certification</div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);"><span style="color:var(--gold);font-size:18px;">—</span>Safety-first culture with zero compromise</div>
+      </div>
+      <a href="#" class="btn-primary reveal reveal-delay-3">Browse Open Positions</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-banner">
+  <div class="container">
+    <div class="cta-decor"><div class="cta-decor-line"></div><div class="cta-decor-diamond"></div><div class="cta-decor-line"></div></div>
+    <h2 class="cta-title">Ready to Take Your Offshore<br>Operations Further?</h2>
+    <p class="cta-sub">Partner with SMS Group for end-to-end marine and offshore solutions — delivered on time, on spec, and on budget.</p>
+    <div class="cta-buttons">
+      <a href="#" class="cta-btn-dark">Get in Touch</a>
+      <a href="#" class="cta-btn-outline">Download Company Profile</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="logo.png" alt="Selective Marine Services Group" class="footer-logo-img">
+        <span class="footer-wordmark">Selective Marine<span> Services</span></span>
+        <p class="footer-tagline">Setting the Standard for Excellence in Marine &amp; Offshore Engineering since 1995.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">tw</a>
+          <a href="#" class="social-icon">yt</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Company</span>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Our Fleet</a></li>
+          <li><a href="#">Safety</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Services</span>
+        <ul class="footer-links">
+          <li><a href="#">Rig Inspection</a></li>
+          <li><a href="#">Fabrication</a></li>
+          <li><a href="#">Project Management</a></li>
+          <li><a href="#">Jacking System Repairs</a></li>
+          <li><a href="#">Electrical &amp; Mechanical</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Contact</span>
+        <div class="footer-contact">
+          <div class="contact-item"><div class="contact-dot"></div><span class="contact-text">Office #701, Nasser Al Serkal Building, Airport Road, Dubai, UAE</span></div>
+          <div class="contact-item"><div class="contact-dot"></div><span class="contact-text">+971 4 236 7373</span></div>
+          <div class="contact-item"><div class="contact-dot"></div><span class="contact-text">info@selectivemarine.com</span></div>
+          <div class="contact-item"><div class="contact-dot"></div><span class="contact-text">Mon–Fri, 8:00am – 6:00pm GST</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Selective Marine Services Group — Registered in British Virgin Islands</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+document.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// HAMBURGER MENU
+const hamburger=document.getElementById('hamburger');
+const mobileDrawer=document.getElementById('mobileDrawer');
+hamburger.addEventListener('click',()=>{
+  const isOpen=mobileDrawer.classList.toggle('open');
+  hamburger.classList.toggle('open',isOpen);
+  hamburger.setAttribute('aria-expanded',isOpen);
+});
+// Close drawer on link click
+mobileDrawer.querySelectorAll('a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+  });
+});
+// Close drawer on outside click
+document.addEventListener('click',(e)=>{
+  if(!hamburger.contains(e.target)&&!mobileDrawer.contains(e.target)){
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+  }
+});
+
+// HERO SLIDESHOW
+const slides=document.querySelectorAll('.slide');
+const indicators=document.querySelectorAll('.indicator');
+const hc=document.getElementById('heroContent');
+const hEye=document.getElementById('heroEyebrow');
+const hL1=document.getElementById('heroLine1');
+const hL2=document.getElementById('heroLine2');
+const hDesc=document.getElementById('heroDesc');
+const slideData=[
+  {e:'Rig Inspection',l1:'NOTHING GETS',l2:'PAST OUR EYE.',d:'Rigorous structural, mechanical, and compliance inspections — so you know exactly where your asset stands before committing a single dollar.'},
+  {e:'Fabrication',l1:'BUILT STRONG.',l2:'BUILT TO LAST.',d:'Marine-grade fabrication from structural steelwork to custom offshore components — engineered for the harshest environments on earth.'},
+  {e:'Project Management',l1:'ON TIME.',l2:'ON SPEC. ALWAYS.',d:'End-to-end project oversight from mobilisation to decommissioning — with PMs who know the offshore world\'s unforgiving realities.'},
+  {e:'Global Operations',l1:'ANYWHERE',l2:'YOU NEED US.',d:'Operating across UAE, India, Singapore, Nigeria, China, Malaysia, France, and The Netherlands — 30 years, no limits.'}
+];
+let cur=0,timer;
+function goSlide(i){
+  slides[cur].classList.remove('active');
+  indicators[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');
+  const ind=indicators[cur];
+  ind.classList.add('active');
+  const f=ind.querySelector('.indicator-fill');
+  f.style.animation='none';f.offsetHeight;f.style.animation='';
+  hc.classList.remove('visible');
+  setTimeout(()=>{
+    hEye.textContent=slideData[i].e;
+    hL1.textContent=slideData[i].l1;
+    hL2.textContent=slideData[i].l2;
+    hDesc.textContent=slideData[i].d;
+    hc.classList.add('visible');
+  },350);
+}
+setTimeout(()=>hc.classList.add('visible'),300);
+timer=setInterval(()=>goSlide((cur+1)%4),6000);
+indicators.forEach((ind,i)=>ind.addEventListener('click',()=>{
+  clearInterval(timer);goSlide(i);
+  timer=setInterval(()=>goSlide((cur+1)%4),6000);
+}));
+
+// REVEAL ON SCROLL
+const rObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rObs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+
+// BAR ANIMATIONS
+const bObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill').forEach(bar=>{
+        bar.style.width=bar.dataset.w+'%';
+      });
+      bObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.2});
+const peopleVisual=document.querySelector('.people-stat-row');
+if(peopleVisual) bObs.observe(peopleVisual);
+</script>
+</body>
+</html>
